@@ -2,6 +2,8 @@
  * This server.js file is the primary file of the 
  * application. It is used to control the project.
  *******************************************/
+const inventoryRoute = require('./routes/inventoryRoute')
+const baseController = require('./controllers/baseController')
 /* ***********************
  * Require Statements
  *************************/
@@ -11,8 +13,7 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 //Require the inventoryRoute file
-const inventoryRoute = require('./routes/inventoryRoute');
-const baseController = require('./controllers/baseController')
+
 
 
 
@@ -28,13 +29,11 @@ app.set('layout', './layouts/layout')
  *************************/
 app.use(static)
 
-
-
 //Index route
-app.get('/', baseController.buildHome)// I have doubts about if I no mistaken this part or if it is in the right part 
+app.get('/', baseController.buildHome)
 
 //inventory
-app.use("/inv", invetoryRoute)
+app.use("/inv", inventoryRoute)
 
 /* ***********************
  * Local Server Information
