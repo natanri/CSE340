@@ -6,14 +6,31 @@
  * Require Statements
  *************************/
 const express = require("express")
+const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
+const baseController = require('./controllers/baseController')
+
+
+/* ***********************
+ * View Engine and Templates
+ *************************/
+app.set('view engine', 'ejs')
+app.use(expressLayouts)
+app.set('layout', './layouts/layout')
 
 /* ***********************
  * Routes
  *************************/
 app.use(static)
+
+//Index route
+app.get('/', baseController.buildHome)// I have doubts about if I no mistaken this part or if it is in the right part 
+app.use("/inv", invetoryRoute)
+/*app.get('/', (req, res) =>{
+  res.render('index', {title: 'Home'})
+})*/
 
 /* ***********************
  * Local Server Information
@@ -28,3 +45,4 @@ const host = process.env.HOST
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
+
