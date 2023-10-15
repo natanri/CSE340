@@ -14,10 +14,11 @@ background-image: url('/images/site/small_check.jpg');
 .container{
   margin:auto;
   background-color: white;
-  width: 60%;
+  width: 100%;
   border: 5px solid #34c6da;
   border-radius: 10px;
 }
+
 
 h1{
   font-family: 'Roboto', sans-serif;
@@ -126,9 +127,6 @@ h1{
 .item2{
   margin-left: 80px;
 }
-
-
-
 .item5{
   margin-top: 30px;
   margin-bottom: 10px;
@@ -191,39 +189,29 @@ footer{
 
 @media screen and (max-width: 800px){
   .item2, .one{
-    width: 80%;
+    width: 60%;
   }
-}
-
-@media screen and (max-width: 800px){
   .container-delorean{
     display:flex;
     flex-wrap:wrap;
-  }  
-}
-@media screen and (max-width: 800px){
+    }
   .one{
     width:200px;
   }
-}
-@media screen and (max-width:800px){
   .dmc {
     left: 22%;
     width: 150px;
     height:150px;
     font-size: 10px;    
-  }  
-}
-@media screen and (max-width:800px){
+  } 
   li{    
     margin-top:10px;        
   }
-}
-
-@media screen and (max-width:800px){
   .dmc img{
     width: 130px;
-    margin:0px
-        
-  }
+    margin:0px        
+  } 
+  .item5 {
+    width: 180px;
+  } 
 }
