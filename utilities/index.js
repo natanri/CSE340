@@ -8,7 +8,7 @@ Util.getNav = async function (req, res, next){
     //console.log(data)
     let data = await invModel.getClassifications()
     let list = '<ul>'
-    list += '<li><a href="/" title="Home page"><a/></li>'
+    list += '<li><a href="/" title="Home page">Home<a/></li>'
     data.rows.forEach((row) => {
         list += "<li>"
         list +=
@@ -43,11 +43,11 @@ Util.buildClassificationGrid = async function(data){
         +' on CSE Motors" /></a>'
         grid += '<div class="namePrice">'
         grid += '<hr />'
-        grid += '<h2>'
+        grid += '<h4>'
         grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
         + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
         + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
-        grid += '</h2>'
+        grid += '</h4>'
         grid += '<span>$' 
         + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
         grid += '</div>'
@@ -59,5 +59,12 @@ Util.buildClassificationGrid = async function(data){
     }
     return grid
   }
+
+  /* *************************************** 
+  * Middleware For Handling Errors
+  *Wrap other function in this for
+  *General Error Handling
+  *************************************** */
+ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
   
   module.exports = Util
