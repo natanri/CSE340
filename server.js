@@ -12,7 +12,8 @@ const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
-const utilities = require('./utilities/index')
+const utilities = require('./utilities/')
+const detail = require('./inventory/detail.ejs')
 //Require the inventoryRoute file
 
 /* ***********************
@@ -32,7 +33,8 @@ app.get('/', utilities.handleErrors(baseController.buildHome))
 
 //inventory
 app.use("/inv", inventoryRoute)
-
+//View Detail
+app.use('/inv', detail)
 //File Not Found Route - must be last route in list
 app.use(async(req, res, next) => {
   next({status: 404, message: 'LIKE UNICORNS, THIS PAGE DOES NOT EXIST... OR AT LEAST NOT ANYMORE.'})
