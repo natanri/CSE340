@@ -13,7 +13,7 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const utilities = require('./utilities/')
-//const detail = require('./inventory/detail.ejs')
+//const detail = require('./views/errors')
 //Require the inventoryRoute file
 
 /* ***********************
