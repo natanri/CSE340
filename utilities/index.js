@@ -8,20 +8,20 @@ Util.getNav = async function (req, res, next){
     //console.log(data)
     let data = await invModel.getClassifications()
     let list = '<ul>'
-    list += '<li><a href="/" title="Home page">Home<a/></li>'
+    list += '<li> <a href="/" title="Home page">Home </a> </li> '
     data.rows.forEach((row) => {
         list += "<li>"
         list +=
             '<a href="/inv/type/' + 
             row.classification_id +
-            '"title="See our inventory of ' +
+            ' " title="See our inventory of ' +
             row.classification_name +
             ' vehicles">' + 
             row.classification_name +
             "</a>"
         list += "</li>"
     })
-    list += "<ul>"
+    list += "</ul>"
     return list
 }
 
@@ -37,14 +37,14 @@ Util.buildClassificationGrid = async function(data){
       data.forEach(vehicle => { 
         grid += '<li>'
         grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
-        + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-        + 'details"><img src="' + vehicle.inv_thumbnail 
-        +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-        +' on CSE Motors" /></a>'
-        grid += '<div class="namePrice">'
-        grid += '<hr />'
-        grid += '<h4>'
-        grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
+        + ' " title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
+        + ' details"><img src="' + vehicle.inv_thumbnail 
+        + ' " alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
+        + ' on CSE Motors" /></a>'
+        grid += ' <div class="namePrice">'
+        grid += ' <hr />'
+        grid += ' <h4>'
+        grid += ' <a href="../../inv/detail/' + vehicle.inv_id + ' " title="View ' 
         + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
         + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
         grid += '</h4>'
@@ -67,18 +67,22 @@ Util.buildClassificationGrid = async function(data){
   Util.buildInventoryDetailGrid = async function(data){
     let grid
     if(data.length > 0){
-      grid = '<ul id="inv-display">'
+      grid = '<div id="inv-display">' 
       data.forEach(vehicle => { 
         grid += '<h1>' + ' ' + vehicle.inv_year +' ' + vehicle.inv_make + ' ' + ' ' + vehicle.inv_model + '</h1>'        
-        grid += '<a href="../../inv/detail/' + ' ' + vehicle.inv_image + '</a>'
-        //grid += '<p>'
-        grid += '<h2' + '  ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' ' + 'Detail' + '</h2'
-        grid += 'Price$: ' + ' ' + new Intl.NumberFormat('en-US').format(vehicle.inv_price)
-        grid += '<b>Details: ' + vehicle.inv_description
-        grid += '<b>Color: ' + vehicle.inv_color
-        grid += '<b>Miles: ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles)
-        //grid += '</p>'
+        grid += '<a href="../../detail' + vehicle.inv_id + '">' + '' + '<img src="' + vehicle.inv_image + '" class="image"/>' + '</a>'
+        grid += '<section>'
+        grid += '<h2>' + vehicle.inv_make + ' ' + vehicle.inv_model + ' ' + 'Detail' + '</h2>'
+        grid += '<h4><b><span> Price:$' + ' ' 
+        + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span></b><br></h4>'
+        grid += '<p><b> Description: </b>' + ''
+        + vehicle.inv_description  + '<br></p>' 
+        grid += '<h4><b> <span> Color:</b> ' 
+        + vehicle.inv_color + '</span><br></h4>'
+        grid += '<h4><b> <span>  Miles:</b> ' 
+        + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</span><br></h4>'        
       })
+      grid += '</div>'
       
     } else { 
       grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
@@ -92,5 +96,4 @@ Util.buildClassificationGrid = async function(data){
   *General Error Handling
   *************************************** */
  Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
-  
-  module.exports = Util
+ module.exports = Util
