@@ -60,7 +60,7 @@ a:link {
 
 /*************NAV CSS*******************/
 nav {   
-  overflow: hidden;
+  overflow:auto;
   background-color: #333;   
   margin-top: 50px;
   margin-bottom: 50px;       
@@ -68,16 +68,17 @@ nav {
 
 nav > ul{
   margin: 0px;
+  
 }
 
 nav li{  
   text-decoration: none;
   float: left;
-  width: 15%;  
+  width: 16%;  
   font-family: 'Roboto', sans-serif;
   display: block; 
   text-align: center;
-  padding: 14px 16px;    
+  padding: 20px;
 }
 
 nav li:hover{ 
@@ -258,19 +259,36 @@ footer{
 }
 
 /************RESPONSIVE*******************/
-@media screen and (max-width: 600px){
-  .item2, .one, main{
+@media screen and (max-width: 450px){
+  #wrapper{
+    width: 100%;
+    text-align: center;
+  }
+  nav ul{   
+    padding-left: 1%;
+    padding-top: 1%;
+    padding-bottom: 5%;
+    
+  }
+  nav li{   
+    width: 57px;
+    text-align:center;  
+    padding: 20px;
+      
+  }
+  .item2{
     width: 80%;
   }
+
   .container-delorean {
     display:flex;
-    flex-wrap:wrap;
+    flex-wrap:wrap;    
     }
   .one{
-    width:200px;
+    width:150px;
   }
   .dmc {
-    left: 22%;
+    left: 5%;
     width: 150px;
     height:150px;
     font-size: 10px;    
@@ -286,7 +304,11 @@ footer{
     width: 180px;
   } 
   main #inv-display {
-    display: block;     
+    display: block;
+    text-align: start;         
+  }
+  .image{
+    width: 100%;
   }
   
 }
