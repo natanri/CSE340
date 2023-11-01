@@ -11,7 +11,7 @@ display: flex;
 background-image: url('/images/site/small_check.jpg');
 }
 
-#wrapper{
+#wrapper{  
   margin:auto;
   background-color: white;
   width: 90%;
@@ -87,29 +87,31 @@ nav li:hover{
 }
 
 /****************MAIN PANEL***************/
-main{  
-  
+main{    
   font-family: 'Roboto', sans-serif;   
   text-decoration: none;
 }
 
 main #inv-display{   
   display: grid; 
-  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-columns: 1fr 1fr 1fr ;
   justify-content: flex-start;
   list-style-type: none;     
 }
 
+
 main li img{ 
+  width: 100%;
   margin-top: 0px;   
   border-radius: 10px;       
 }
 hr{
-  border-style: solid grey;
-  border-width: 4px;  
+  border-style: solid;
+  border-color: grey;
+  border-width: 1px;  
 }
 
-#inv-display li{   
+#inv-display li{    
   border: solid grey 1px;
   height: 260px;
   border-radius: 10px; 
@@ -124,11 +126,12 @@ hr{
 }
 #inv-display a {    
   grid-column: 1;
-  grid-row: 2/3;
+  grid-row: 2 / 3;
 }
 #inv-display section{
-  grid-column: 4/6;
-  grid-row: 2/4;
+  grid-column: 2 / 4 ;
+  grid-row: 2 / 4;
+  padding-left: 50px;
 }
 
 section h4 , p{
@@ -170,7 +173,7 @@ section h4 , p{
 
 .dmc h2{  
   font-family: 'Roboto', sans-serif;
-  font-size: 1.5 em;
+  font-size: 20px;
   margin-top: 5px;
   margin-bottom: 0px;
 }
@@ -204,8 +207,8 @@ section h4 , p{
 .container-delorean{
   font-family: 'Roboto', sans-serif;
   display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-row: auto auto auto auto;
+  grid-template-columns: auto auto auto ;
+  
   justify-content: center;
   justify-items: end;
 }
