@@ -19,6 +19,10 @@ background-image: url('/images/site/small_check.jpg');
   border-radius: 10px;
   padding: 20px;
  }
+ /*messages*/
+ #messages{
+  color: red;
+ }
 /* font familiy */
 .item1{
   font-family: 'Roboto', sans-serif;
@@ -106,6 +110,7 @@ main li img{
   border-radius: 10px;       
 }
 hr{
+  display: flex;
   border-style: solid;
   border-color: grey;
   border-width: 1px;  
@@ -113,7 +118,7 @@ hr{
 
 #inv-display li{    
   border: solid grey 1px;
-  height: 260px;
+  height: auto;
   border-radius: 10px; 
   margin: 10px;  
   text-align: center;         
@@ -128,14 +133,46 @@ hr{
   grid-column: 1;
   grid-row: 2 / 3;
 }
-#inv-display section{
+#inv-display .info{
   grid-column: 2 / 4 ;
   grid-row: 2 / 4;
   padding-left: 50px;
 }
 
-section h4 , p{
+.info h4 , #description{
   margin: 40px;  
+}
+
+/**************Login********************/
+.login{  
+  width: 25%;
+  border-radius: 10px;
+  background-color:rgb(17, 108, 160);  
+ 
+  padding: 5px;
+}
+#email, #pswd{
+  width: 80%;
+}
+
+main > .login{
+  justify-content: center;
+}
+
+/************Register*******************/
+.register{  
+  width: 25%;
+  border-radius: 10px;
+  background-color:rgb(17, 108, 160);  
+ 
+  padding: 5px;
+}
+#email, #pswd, #lastname, #firstname, #email, #pswd {
+  width: 80%;
+}
+
+main > .register{
+  justify-content: center;
 }
 
 /******CONTAINER DMC********************/
@@ -313,5 +350,7 @@ footer{
   .image{
     width: 100%;
   }
-  
+  .login{
+    display: table-cell;
+  }
 }

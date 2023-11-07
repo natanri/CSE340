@@ -1,0 +1,22 @@
+<h1><%- title %></h1>
+
+<div class="register">
+    <form action="/account/register" method="post">
+        <fieldset>
+            <h4>ALL FIELDS ARE REQUIRED</h4>
+            <label for="account_firstname">First name:</label><br>
+            <input type="text" id="firstname" name="account_firstname"><br>
+
+            <label for="account_lastname">Last name:</label><br>
+            <input type="text" id="lastname" name="account_lastname"><br>
+
+            <label for="account_email">Email address:</label><br>
+            <input type="text" id="email" name="account_email"><br>
+
+            <label for="password_account">Password:</label><br>
+            <input type="password" id="pswd" name="password_account" maxlength="12"><br>
+
+            <button type="submit">Register</button><br>
+        </fieldset>
+    </form>    
+</div>

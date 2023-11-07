@@ -71,16 +71,16 @@ Util.buildClassificationGrid = async function(data){
       data.forEach(vehicle => { 
         grid += '<h1>' + ' ' + vehicle.inv_year +' ' + vehicle.inv_make + ' ' + ' ' + vehicle.inv_model + '</h1>'        
         grid += '<a href="../../detail' + vehicle.inv_id + '">' + '' + '<img src="' + vehicle.inv_image + '" class="image"/>' + '</a>'
-        grid += '<section>'
+        grid += '<div class="info">'
         grid += '<h2>' + vehicle.inv_make + ' ' + vehicle.inv_model + ' ' + 'Detail' + '</h2>'
         grid += '<h4><b><span> Price:$' + ' ' 
         + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span></b><br></h4>'
-        grid += '<p><b> Description: </b>' + ''
+        grid += '<p id="description"><b> Description: </b>' + ''
         + vehicle.inv_description  + '<br></p>' 
         grid += '<h4><b> <span> Color:</b> ' 
         + vehicle.inv_color + '</span><br></h4>'
         grid += '<h4><b> <span>  Miles:</b> ' 
-        + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</span><br></h4>'        
+        + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</span><br></h4></div>'        
       })
       grid += '</div>'
       
