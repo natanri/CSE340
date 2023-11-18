@@ -54,20 +54,17 @@ app.use(bodyParser.urlencoded({ extended: true})) // for parsing application/x-w
  * Routes
  *************************/
 app.use(static)
-
 //Index route
 app.get('/', utilities.handleErrors(baseController.buildHome))
-//inventory
+//inventory routes
 app.use("/inv", inventoryRoute)
 //Route of account
-app.use('/account', require('./routes/accountRoute'))
 //Route to build login view
 app.use('/account', require('./routes/accountRoute'))
 //File Not Found Route - must be last route in list
 app.use(async(req, res, next) => {
   next({status: 404, message: 'LIKE UNICORNS, THIS PAGE DOES NOT EXIST... OR AT LEAST NOT ANYMORE.'})
 })
-
 
 /* *****************************
 * Express Error Handler

@@ -8,7 +8,7 @@ Util.getNav = async function (req, res, next){
     //console.log(data)
     let data = await invModel.getClassifications()
     let list = '<ul>'
-    list += '<li> <a href="/" title="Home page">Home </a> </li> '
+    list += '<li> <a href="/" title="Home page">Home</a> </li> '
     data.rows.forEach((row) => {
         list += "<li>"
         list +=
@@ -25,7 +25,25 @@ Util.getNav = async function (req, res, next){
     return list
 }
 
-module.exports = Util;
+/* ************************
+ *Constructs the dropdown 
+ * ************************ */
+ Util.getDropDown = async function (classification_id = null){
+  //console.log(data)
+  let data = await invModel.getClassifications()
+  let list = '<select type="range" id="classification_id" name="classification_id" required>'
+  list += '<option>choose a classification</option>'
+  data.rows.forEach((row) => {
+      list += `<option value=${row.classification_id}`
+       
+      if(classification_id != null && row.classification_id == classification_id){
+        list+= " selected "
+        isSelected=""}
+      list += `>${row.classification_name}</option>`
+  })
+  list += "</select>"
+  return list
+}
 
 /* **************
 * Build the classification view HTML
@@ -67,7 +85,7 @@ Util.buildClassificationGrid = async function(data){
   Util.buildInventoryDetailGrid = async function(data){
     let grid
     if(data.length > 0){
-      grid = '<div id="inv-display">' 
+      grid = '<div id="inv-display2">' 
       data.forEach(vehicle => { 
         grid += '<h1>' + ' ' + vehicle.inv_year +' ' + vehicle.inv_make + ' ' + ' ' + vehicle.inv_model + '</h1>'        
         grid += '<a href="../../detail' + vehicle.inv_id + '">' + '' + '<img src="' + vehicle.inv_image + '" class="image"/>' + '</a>'
