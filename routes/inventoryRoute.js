@@ -27,8 +27,7 @@ router.get('/getInventory/:classification_id', utilities.handleErrors(invControl
 router.get('/edit/:inv_id', utilities.handleErrors(invController.editInventoryView))
 
 //Route post  "update vehicle"
-router.post('/edit', validate.invRules(),
-validate.)
+
 
 //Route to edit classification
 router.post('/add-classification', 
