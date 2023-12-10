@@ -198,7 +198,7 @@ input, select{
   width: 100px;
 }
 
-#inv_make, #model, #inv_image, #inv_thumbnail, #color{
+#inv_make, #inv_model, #inv_image, #inv_thumbnail{
   width: 200px;
 }
 
@@ -237,10 +237,11 @@ fieldset #pswdBtn{
   justify-content: center;
 }
 /**************Vehicle management*******/
-.manager{
-  grid-row: 2;
+main .manager{
+  grid-row: 4;
   margin-left: 30px;
   font-size: 20px;
+ 
 }
 /******CONTAINER DMC********************/
 

@@ -43,10 +43,13 @@ invCont.BuildByInventoryDetail = async function (req, res, next) {
 invCont.ManagementView = async function(req, res, next) {
   try{
     let nav = await utilities.getNav()
+    const classificationSelect = await utilities.getDropDown()
     res.render('./inventory/management',{
+
       title: 'Vehicle Management',
       nav,
-      errors: null
+      errors: null,
+      classificationSelect,
     })    
   }catch(error){
     console.error(
@@ -189,6 +192,51 @@ invCont.addnewInventory = async function(req, res){
       res.status(500).send('Internal Server Error')
   }
 }
+
+/********************************************
+ * Return Inventory by classification as JSON
+ *******************************************/
+invCont.getInventoryJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classification_id)
+  console.log(classification_id)
+  const invData = await invModel.getInventoryByClassificationId(classification_id)
+  
+  if (invData[0].inv_id){
+    return res.json(invData)
+  } else {
+    next(new Error('No data returned'))
+  }
+}
+
+
+/***********************************
+ * build an editing Inventory view
+ ***********************************/
+invCont.editInventoryView = async (req, res, next) => {
+  const inv_id = parserInt(req.params.inv_Id)
+  const data = await invModel.getInventoryById(inv_id)
+  const list = await utilities.getDropDown(data)
+  let nav = await utilities.getNav()
+  const itemName = `${data.inv_make} ${data.inv_model}`
+  res.render('./inventory/edit-inventory', {
+    title: 'Edit ' + itemName,
+    nav,
+    list,
+    errors: null,
+    inv_id: data.inv_id,
+    inv_make: data.inv_make,
+    inv_model: data.inv_model,
+    inv_year: data.inv_year,
+    inv_description: data.inv_description,
+    inv_image: data.inv_image,
+    inv_thumbnail: data.inv_thumbnail,
+    inv_price: data.inv_price,
+    inv_miles: data.inv_miles,
+    inv_color: data.inv_color,
+    classification_id: data.classification_id
+  })
+}
+
 
 
 module.exports = invCont

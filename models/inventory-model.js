@@ -96,4 +96,11 @@ async function addInventory(
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryById, addNewClassification, checkExistingClassification, addInventory};
+module.exports = {
+  getClassifications, 
+  getInventoryByClassificationId, 
+  getInventoryById, 
+  addNewClassification, 
+  checkExistingClassification, 
+  addInventory
+};

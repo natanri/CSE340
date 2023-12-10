@@ -12,6 +12,7 @@ const utilities = require('../utilities')
 const regValidate = require('../utilities/acount-validation')
 
 
+
 /************************
  * Deliver Login View
  ************************/
@@ -23,6 +24,27 @@ router.get('/login', utilities.handleErrors(accountController.buildLogin))
  ************************/
 router.get('/register', utilities.handleErrors(accountController.buildRegister))
 
+/***************************
+ * Process the login attempt
+ ***************************/
+router.get('/login', regValidate.loginRules(),
+//regValidate.checkLoginData,
+utilities.handleErrors(accountController.accountLogin))
+
+/****************************************
+ * Route for management-login view route
+ ****************************************/
+router.get('/', utilities.checkLogin, utilities.handleErrors(accountController.managementLogin))
+
+/****************************
+ * Process the login request
+ ***************************/
+router.post(
+    "/login",
+    //regValidate.loginRules(),
+    regValidate.checkLoginData,
+    utilities.handleErrors(accountController.accountLogin)
+  )
 
 /****************************
  * Deliver Registration View
@@ -30,13 +52,5 @@ router.get('/register', utilities.handleErrors(accountController.buildRegister))
 router.post('/register', regValidate.registrationRules(), 
 regValidate.checkRegData, 
 utilities.handleErrors(accountController.registerAccount))
-
-/***************************
- * Process the login attempt
- ***************************/
-router.post('/login',
- (req, res) => { 
-    res.status(200).send('login process')
-})
 
 module.exports = router

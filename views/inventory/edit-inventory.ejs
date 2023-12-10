@@ -10,9 +10,9 @@
 
 </div>
 
-<div class="newinventory" id="classificationList">
+<div class="newinventory">
     
-    <form action="/inv/add-inventory" method="post">        
+    <form action="/inv/edit-inventory" method="post">        
         <fieldset> 
             <legend><i>All fields are required.</i></legend>           
             <label for="classification_id">Classification:</label><br>
@@ -47,7 +47,9 @@
             <label for="inv_color">Color</label><br>
             <input type="text" name="inv_color" id="inv_color" required value="<%= locals.inv_color %>"><br>
 
-            <button type="submit">Add Vehicle</button><br>
+            <button type="submit">Update Vehicle</button><br>
+            <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%locals.inv_id %>"
+            <%}%>>
         </fieldset>
     </form>    
 </div>
