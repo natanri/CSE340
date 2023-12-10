@@ -30,7 +30,7 @@ Util.getNav = async function (req, res, next){
 /* ************************
  *Constructs the dropdown 
  * ************************ */
- Util.getDropDown = async function (classification_id = null){
+ Util.  getDropDown = async function (classification_id = null){
   //console.log(data)
   let data = await invModel.getClassifications()
   let list = `<select name="classification_id" id="classification_id" required>`

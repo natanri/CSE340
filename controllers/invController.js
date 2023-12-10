@@ -133,6 +133,9 @@ invCont.addnewClassification = async function(req, res){
   }
 }
 
+/******************
+ * add a new item
+ ******************/
 invCont.addnewInventory = async function(req, res){
   let nav = await utilities.getNav()
   let list = await utilities.getDropDown()
@@ -208,20 +211,24 @@ invCont.getInventoryJSON = async (req, res, next) => {
   }
 }
 
-
 /***********************************
  * build an editing Inventory view
  ***********************************/
 invCont.editInventoryView = async (req, res, next) => {
-  const inv_id = parserInt(req.params.inv_Id)
-  const data = await invModel.getInventoryById(inv_id)
-  const list = await utilities.getDropDown(data)
+  const inv_id = parseInt(req.params.inv_id)
   let nav = await utilities.getNav()
-  const itemName = `${data.inv_make} ${data.inv_model}`
+  const data = await invModel.getInventoryById(inv_id)
+  const list = await utilities.getDropDown(data[0].classificationId)  
+  console.log(data)
+  //const itemName = `${data.inv_make} ${data.inv_model}`
+  // Antes de asignar valores en la renderización
+  const itemName = `${data.inv_make || 'Make'} ${data.inv_model || 'Model'}`;
+  
+
   res.render('./inventory/edit-inventory', {
     title: 'Edit ' + itemName,
     nav,
-    list,
+    list: list,
     errors: null,
     inv_id: data.inv_id,
     inv_make: data.inv_make,
@@ -237,6 +244,74 @@ invCont.editInventoryView = async (req, res, next) => {
   })
 }
 
+/******************
+ * add a new item
+ ******************/
+invCont.updateInventory = async function(req, res){
+  let nav = await utilities.getNav()
+  let list = await utilities.getDropDown()
+  try{
+    const {  
+      inv_id,       
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
+      } = req.body  
 
+    const updateResult = await invModel.updateInventory(        
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+      )
+    
+    if(updateResult){
+      const itemName = updateResult.inv_make + " " + updateResult.inv_model
+      req.flash('notice', ` The ${itemName} was successfully updated.`)
+      res.redirect('/inv/')
+      //Clear and rebuild the nav bar before rendering the management view      
+     }else{
+      const list = await utilities.getDropDown(classification_id)
+      const item = `${inv_make} ${inv_model}`
+      req.flash('notice', 'Sorry, the insert failed')
+      //Render the add-Inventory view with an error message
+      res.status(501).render('./inventory/edit-inventory', {
+        title: 'Edit' + itemName,
+        nav, 
+        errors: null,
+        list: list,
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id,
+      })
+    }
+  }catch(error){
+    console.error(
+      'Hi, sorry, I know you are working so hard, but this is not the route.', error)
+      res.status(500).send('Internal Server Error')
+  }
+}
 
 module.exports = invCont

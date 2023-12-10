@@ -1,3 +1,4 @@
+const { parse } = require("dotenv")
 const pool = require("../database")
 
 /* ***************************
@@ -96,11 +97,49 @@ async function addInventory(
   }
 }
 
+/**************************
+ * Update inventory data
+ **************************/
+async function updateInventory(
+  inv_id,   
+  inv_make,
+  inv_model,
+  inv_year,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_miles,
+  inv_color,
+  classification_id){
+  try {
+    const car = parseInt(inv_id)
+    const sql = "UPDATE INTO public.inventory (inv_make, inv_model,inv_year,inv_description,inv_image,inv_thumbnail,inv_price,inv_miles,inv_color,classification_id)VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *"
+     const data = await pool.query(sql, [  
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id,
+        inv_id,
+      ])
+      return data.rows[0]
+  } catch (error) {
+    console.error("Model error: " + error)
+  }
+}
+
 module.exports = {
   getClassifications, 
   getInventoryByClassificationId, 
   getInventoryById, 
   addNewClassification, 
   checkExistingClassification, 
-  addInventory
+  addInventory,
+  updateInventory
 };
